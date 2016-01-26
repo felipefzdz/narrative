@@ -1,0 +1,12 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply from: "versions.gradle"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library:$versions.scala"
+}
+
