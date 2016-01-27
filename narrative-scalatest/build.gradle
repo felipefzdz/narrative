@@ -10,8 +10,8 @@ dependencies {
     compile "org.scala-lang:scala-library:$versions.scala"
     compile "org.scalatest:scalatest_2.11:$versions.scalaTest"
     compile "org.slf4j:slf4j-api:$versions.slf4j"
+    compile "uk.org.lidalia:slf4j-test:$versions.slf4jTest"
 
-    testCompile "org.slf4j:slf4j-simple:$versions.slf4j"
     testCompile "junit:junit:$versions.junit"
 }
 
