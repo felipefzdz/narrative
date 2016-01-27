@@ -2,6 +2,7 @@ package com.narrative
 
 import org.junit.runner.RunWith
 import org.scalatest.WordSpec
+import org.scalatest.exceptions.TestFailedException
 import org.scalatest.junit.JUnitRunner
 import org.slf4j.{Logger, LoggerFactory}
 import uk.org.lidalia.slf4jtest.{TestLogger, TestLoggerFactory}
@@ -19,6 +20,16 @@ class NarrativeSpec extends WordSpec with Narrative {
         "Hola",
         "Ciao"
       )
+    }
+
+    "fail when the expected lines are not logged" in {
+      new SystemUnderTest().triggerGreetings()
+      val thrown = intercept[TestFailedException] {
+        loggingNarrativeShouldBe(
+          "I'm grumpy today, no greetings"
+        )
+      }
+      thrown.getMessage() should include ("was not equal to")
     }
   }
 }
