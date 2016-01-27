@@ -8,5 +8,15 @@ repositories {
 
 dependencies {
     compile "org.scala-lang:scala-library:$versions.scala"
+    compile "org.scalatest:scalatest_2.11:$versions.scalaTest"
+
+    testCompile "junit:junit:$versions.junit"
 }
 
+compileScala {
+    scalaCompileOptions.useCompileDaemon = true
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+}
