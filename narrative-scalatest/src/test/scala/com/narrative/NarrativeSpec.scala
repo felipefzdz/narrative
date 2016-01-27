@@ -4,8 +4,6 @@ import org.junit.runner.RunWith
 import org.scalatest.WordSpec
 import org.scalatest.junit.JUnitRunner
 
-import scala.collection.mutable.ListBuffer
-
 @RunWith(classOf[JUnitRunner])
 class NarrativeSpec extends WordSpec with Narrative {
 
@@ -14,7 +12,11 @@ class NarrativeSpec extends WordSpec with Narrative {
   "Narrative" should {
     "pass when the expected lines are logged" in {
       new SystemUnderTest().triggerGreetings()
-      loggingNarrativeShouldBe(ListBuffer("Hi", "Hola", "Ciao"))
+      loggingNarrativeShouldBe(
+        "Hi",
+        "Hola",
+        "Ciao"
+      )
     }
   }
 
