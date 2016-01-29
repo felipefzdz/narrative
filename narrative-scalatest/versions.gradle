@@ -1,7 +1,8 @@
 ext.versions = [
-        junit      : "4.12",
-        scala      : "2.11.7",
-        scalaTest  : "2.2.6",
-        slf4j      : "1.7.14",
-        slf4jTest : "1.2.0"
+        junit       : "4.12",
+        nscalaTime  : "2.8.0",
+        scala       : "2.11.7",
+        scalaTest   : "2.2.6",
+        slf4j       : "1.7.14",
+        slf4jTest   : "1.2.0"
 ]

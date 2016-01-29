@@ -4,7 +4,7 @@ import org.junit.runner.RunWith
 import org.scalatest.WordSpec
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.junit.JUnitRunner
-import org.slf4j.{Logger, LoggerFactory}
+import org.slf4j.LoggerFactory
 
 @RunWith(classOf[JUnitRunner])
 class NarrativeSpec extends WordSpec with Narrative {
@@ -33,15 +33,23 @@ class NarrativeSpec extends WordSpec with Narrative {
   }
 }
 
-class SystemUnderTest() {
-  val logger: Logger = LoggerFactory.getLogger(classOf[SystemUnderTest])
+class SystemUnderTest() extends Collaborator {
+  val logger = LoggerFactory.getLogger(classOf[SystemUnderTest])
   val loggerForLibraryPackages = LoggerFactory.getLogger(classOf[WordSpec])
 
   def triggerGreetings(): Unit = {
     logger.info("Hi")
     loggerForLibraryPackages.info("Salut")
-    logger.info("Hola")
+    triggerCollaboratorGreetings
     logger.info("Ciao")
   }
 
+}
+
+trait Collaborator {
+  val collaboratorLogger = LoggerFactory.getLogger(classOf[Collaborator])
+
+  def triggerCollaboratorGreetings(): Unit = {
+    collaboratorLogger.info("Hola")
+  }
 }
