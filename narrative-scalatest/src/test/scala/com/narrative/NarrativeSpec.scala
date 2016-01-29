@@ -5,12 +5,11 @@ import org.scalatest.WordSpec
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.junit.JUnitRunner
 import org.slf4j.{Logger, LoggerFactory}
-import uk.org.lidalia.slf4jtest.{TestLogger, TestLoggerFactory}
 
 @RunWith(classOf[JUnitRunner])
 class NarrativeSpec extends WordSpec with Narrative {
 
-  implicit val logger: TestLogger = TestLoggerFactory.getTestLogger(classOf[SystemUnderTest]);
+  override val narrativeScope = "com.narrative"
 
   "Narrative" should {
     "pass when the expected lines are logged" in {
@@ -29,16 +28,18 @@ class NarrativeSpec extends WordSpec with Narrative {
           "I'm grumpy today, no greetings"
         )
       }
-      thrown.getMessage() should include ("was not equal to")
+      thrown.getMessage() should include("was not equal to")
     }
   }
 }
 
 class SystemUnderTest() {
-  val logger: Logger = LoggerFactory.getLogger(classOf[SystemUnderTest]);
+  val logger: Logger = LoggerFactory.getLogger(classOf[SystemUnderTest])
+  val loggerForLibraryPackages = LoggerFactory.getLogger(classOf[WordSpec])
 
   def triggerGreetings(): Unit = {
     logger.info("Hi")
+    loggerForLibraryPackages.info("Salut")
     logger.info("Hola")
     logger.info("Ciao")
   }
