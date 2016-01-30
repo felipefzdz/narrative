@@ -5,6 +5,8 @@ Narrative is a testing assertion library that implements logging first developme
 ```scala
 class BookingTrainSpec extends Narrative
 
+override val narrativeScope = "com.narrative"
+
 "Booking train system" should {
     "abort the transaction when paying gateway timeouts” in {
           givenPaypalIsDown()
@@ -38,17 +40,18 @@ Coming up with dynamic values inserted in our narratives could be cumbersome. Ho
 
 ## THEATRIC MODE
 
-(Work in progress) You can configure Narrative in theatric mode. This modes gives more information about who was logging and with which intensity. It provides a subject, the class, and a verb, the logging level converted to verb in 3rd person of singular, for the object that is the log message:
+You can configure Narrative in theatric mode. This modes gives more information about who was logging and with which intensity. It provides a subject, the class, and a verb, the logging level converted to verb in 3rd person of singular, for the object that is the log message:
 
 ```scala
-implicit val narrativeMode: NarrativeMode = NarrativeModes.THEATRIC
+override val narrativeScope = "com.narrative"
+implicit val narrativeMode: NarrativeMode = THEATRIC
 
 loggingNarrativeShouldBe {
-     PaymentValidator informs       - Validating an “internationalTransaction" payment for a country called "Spain".
-     PaypalClient informs               - Retrieving accessToken from Paypal for a user identified with "1243-abcd" userId.
-     PaypalClient informs               - Sending payment to Paypal in behalf of a user identified with "1243-abcd" userId and with "sad-7898" paymentId.
-     PaypalClient errors                  - Paypal platform timeout when processing a payment in behalf of a user identified with v1243-abcd" userId and with "sad-7898" paymentId.
-     PaymentRepository informs    - Updating payment identified with "sad-7898" paymentId with status "ABORTED".
+    "PaymentValidator informs - Validating an `internationalTransaction` payment for a country called `Spain`.",
+    "PaypalClient informs - Retrieving accessToken from Paypal for a user identified with `1243-abcd` userId.",
+    "PaypalClient informs - Sending payment to Paypal in behalf of a user identified with `1243-abcd` userId and with `sad-7898` paymentId.",
+    "PaypalClient errors - Paypal platform timeout when processing a payment in behalf of a user identified with `1243-abcd` userId and with `sad-7898` paymentId.",
+    "PaymentRepository informs - Updating payment identified with `sad-7898` paymentId with status `ABORTED`."
 }
 ```
 

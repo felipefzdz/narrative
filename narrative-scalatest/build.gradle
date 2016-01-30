@@ -11,7 +11,6 @@ dependencies {
     compile "org.scalatest:scalatest_2.11:$versions.scalaTest"
     compile "org.slf4j:slf4j-api:$versions.slf4j"
     compile "uk.org.lidalia:slf4j-test:$versions.slf4jTest"
-    compile "com.github.nscala-time:nscala-time_2.11:$versions.nscalaTime"
 
     testCompile "junit:junit:$versions.junit"
 }
