@@ -1,4 +1,7 @@
 # NARRATIVE
+### Grasp your logging quality as soon as possible.
+
+[![Build Status](https://travis-ci.org/felipefzdz/narrative.svg?branch=master)](https://travis-ci.org/felipefzdz/narrative)
 
 Narrative is a testing assertion library that implements logging first development. The logging assertion should be appended at the end of Acceptance tests that exercise enough complexity to conform a juicy narrative. Let's see an example for ScalaTest.
 
