@@ -1,4 +1,4 @@
-package com.narrative
+package com.github.felipefzdz.narrative
 
 import org.scalatest.{BeforeAndAfterEach, Matchers, Suite}
 import uk.org.lidalia.slf4jext.Level

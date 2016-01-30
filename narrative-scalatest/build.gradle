@@ -1,6 +1,14 @@
+plugins {
+    id "com.jfrog.bintray" version "1.5"
+}
+
 apply plugin: 'scala'
 apply plugin: 'idea'
+apply plugin: 'maven-publish'
 apply from: "versions.gradle"
+
+group = 'com.github.felipefzdz'
+version = '1.0'
 
 repositories {
     mavenCentral()
@@ -21,4 +29,83 @@ compileScala {
 
 tasks.withType(ScalaCompile) {
     scalaCompileOptions.useAnt = false
+}
+
+ext.artifactBaseName = 'narrative-scalatest'
+
+task sourcesJar(type: Jar) {
+    baseName artifactBaseName
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+task scaladocJar(type: Jar, dependsOn: scaladoc) {
+    baseName artifactBaseName
+    classifier 'scaladoc'
+    from scaladoc.destinationDir
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+
+artifacts {
+    archives sourcesJar
+    archives scaladocJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId 'narrative-scalatest'
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'Narrative Scalatest')
+                root.appendNode('description', 'Testing assertion library that implements logging first development.')
+                root.appendNode('url', 'https://github.com/felipefzdz/narrative')
+
+                def license = root.appendNode('licenses').appendNode('license')
+                license.appendNode('name', 'Apache License v2.0')
+                license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
+                license.appendNode('distribution', 'repo')
+
+                def developer = root.appendNode('developers').appendNode('developer')
+                developer.appendNode('id', 'felipefzdz')
+                developer.appendNode('name', 'Felipe Fernández')
+                developer.appendNode('email', 'olid16@gmail.com')
+                developer.appendNode('organization', 'Github')
+                developer.appendNode('organizationUrl', 'https://github.com/felipefzdz')
+
+                def scm = root.appendNode('scm')
+                scm.appendNode('connection', 'scm:git@github.com:felipefzdz/narrative.git')
+                scm.appendNode('developerConnection', 'scm:git@github.com:felipefzdz/narrative.git')
+                scm.appendNode('url', 'git@github.com:felipefzdz/narrative.git')
+            }
+
+            artifact sourcesJar
+            artifact scaladocJar
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    pkg {
+        repo = 'Narrative'
+        name = 'narrative-scalatest'
+        userOrg = 'felipefzdz'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/felipefzdz/narrative.git'
+        version {
+            name = '1.0'
+        }
+        publications = ['mavenJava']
+    }
 }

@@ -1,4 +1,4 @@
-package com.narrative
+package com.github.felipefzdz.narrative
 
 sealed trait NarrativeMode
 

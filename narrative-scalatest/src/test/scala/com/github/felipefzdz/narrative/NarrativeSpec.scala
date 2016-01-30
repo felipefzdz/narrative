@@ -1,4 +1,4 @@
-package com.narrative
+package com.github.felipefzdz.narrative
 
 import org.junit.runner.RunWith
 import org.scalatest.WordSpec
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 @RunWith(classOf[JUnitRunner])
 class NarrativeSpec extends WordSpec with Narrative {
 
-  override val narrativeScope = "com.narrative"
+  override val narrativeScope = "com.github.felipefzdz.narrative"
 
   "Narrative" should {
     "pass when the expected sentences are logged" in {
