@@ -30,7 +30,7 @@ override val narrativeScope = "com.narrative"
 
 Logging should be a first class citizen in every system that aims to be easily diagnosed and maintained. Logging after the production code has been done is boring (as with testing), so developers tend to miss this duty. At the same time, logging/testing first could help you to drive production code. Logging makes sense in context, we called that context narrative. Achieving the sweet spot of just enough logging is really hard, and thinking in narrative could help you to figure out gaps or noises. At the same time it’s easy to log objects that includes private information like passwords or tokens and not realising of that until we actually read production logs.
 
-We should test how robust are our non-functional capabilities, and not only our functional features. Being able to diagnose, and ultimately fix, issues is a non-functional dimension that should be subject to the same standards as performance, reliability or security. 
+We should test how robust are our non-functional capabilities, and not only our functional features. Being able to diagnose, and ultimately fix, issues is a non-functional dimension that should be subject to the same standards as performance, reliability or security.
 
 Those tests have a lot info about the implementation of your design and that could make further refactors harder, but that’s the same problem that you could face with some style of unit testing. If that’s a concern for you, you could delete those tests after they’ve helped you writing proper logging. Just to summarise, this logging first development could give you the following benefits:
 
@@ -39,7 +39,7 @@ Those tests have a lot info about the implementation of your design and that cou
 - Provide technical documentation at acceptance testing level with a business language
 - Provide insights to security, support or operations engineers that could have different needs and drivers that application developers.
 
-Coming up with dynamic values inserted in our narratives could be cumbersome. However is fundamental that we get a feeling of those logged entities, as the meat is often contained there. It's important to note that we're not looking for artificially fitting our preconceived ideas about some narrative, but being able to confirm a coherent and readable outcome. So, in order to insert those dynamic values we could use [Characterisation test technique](https://en.wikipedia.org/wiki/Characterization_test). 
+Coming up with dynamic values inserted in our narratives could be cumbersome. However is fundamental that we get a feeling of those logged entities, as the meat is often contained there. It's important to note that we're not looking for artificially fitting our preconceived ideas about some narrative, but being able to confirm a coherent and readable outcome. So, in order to insert those dynamic values we could use [Characterisation test technique](https://en.wikipedia.org/wiki/Characterization_test).
 
 ## THEATRIC MODE
 
@@ -58,3 +58,4 @@ loggingNarrativeShouldBe {
 }
 ```
 
+This style has some limitations when using traits in Scala. When you mix several traits into a class called `MyClass` the character (the logger that created this logging event) will be always `MyClass`.
