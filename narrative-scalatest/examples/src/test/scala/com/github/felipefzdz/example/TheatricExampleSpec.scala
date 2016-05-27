@@ -11,6 +11,7 @@ class TheatricExampleSpec extends WordSpec with Narrative {
   implicit val narrativeMode: NarrativeMode = THEATRIC
 
   val example = new TheatricExample(new PaymentValidator(), new PaypalClient(), new PaymentRepository())
+
   "Booking train system" should {
     "abort the transaction when paying gateway timeouts" in {
       example.book()
