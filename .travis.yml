@@ -1,6 +1,8 @@
 language: java
 
-script: cd narrative-scalatest && ./gradlew clean test 
+script:
+  - cd narrative-scalatest && ./gradlew clean test
+  - cd examples && ./gradlew clean test
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
