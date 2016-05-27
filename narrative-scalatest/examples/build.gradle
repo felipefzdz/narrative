@@ -1,0 +1,29 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply from: "versions.gradle"
+
+group = 'com.github.felipefzdz'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library:$versions.scala"
+    compile "com.typesafe.scala-logging:scala-logging_2.11:$versions.scalaLogging"
+
+    testCompile "junit:junit:$versions.junit"
+    testCompile "org.scalatest:scalatest_2.11:$versions.scalatest"
+    testCompile "com.github.felipefzdz:narrative-scalatest:$versions.narrativeScalatest"
+}
+
+compileScala {
+    scalaCompileOptions.useCompileDaemon = true
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+}
+

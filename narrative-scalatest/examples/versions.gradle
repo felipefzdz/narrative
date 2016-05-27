@@ -1,0 +1,7 @@
+ext.versions = [
+        junit       : "4.12",
+	narrativeScalatest : "1.0",
+        scala       : "2.11.7",
+	scalaLogging : "3.1.0",
+        scalatest   : "2.2.6"
+]
